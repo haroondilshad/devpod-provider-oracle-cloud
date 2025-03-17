@@ -22,8 +22,7 @@ DevPod on Oracle Cloud Infrastructure
 > Use [this referral code](https://hetzner.cloud/?ref=UWVUhEZNkm6p) to get €20 in
 > credits (at time of writing).
 
-[DevPod](https://devpod.sh/) on Oracle Cloud Infrastructure.
-This is based upon the [DigitalOcean provider](https://github.com/loft-sh/devpod-provider-digitalocean).
+[DevPod](https://devpod.sh/) on Oracle Cloud Infrastructure. This project is built on top of the [Hetzner provider](https://github.com/mrsimonemms/devpod-provider-hetzner).
 
 ## Usage
 
