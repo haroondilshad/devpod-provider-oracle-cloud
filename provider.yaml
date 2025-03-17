@@ -1,0 +1,65 @@
+name: oracle-cloud
+version: v0.0.1
+description: DevPod on Oracle Cloud Infrastructure
+icon: https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg
+home: https://github.com/haroondilshad/devpod-provider-oracle-cloud
+binaries:
+  ORACLE_PROVIDER:
+    - os: linux
+      arch: amd64
+      path: https://github.com/haroondilshad/devpod-provider-oracle-cloud/releases/download/v0.0.1/devpod-provider-oracle-cloud-linux-amd64
+      checksum: ""
+    - os: linux
+      arch: arm64
+      path: https://github.com/haroondilshad/devpod-provider-oracle-cloud/releases/download/v0.0.1/devpod-provider-oracle-cloud-linux-arm64
+      checksum: ""
+    - os: darwin
+      arch: amd64
+      path: https://github.com/haroondilshad/devpod-provider-oracle-cloud/releases/download/v0.0.1/devpod-provider-oracle-cloud-darwin-amd64
+      checksum: ""
+    - os: darwin
+      arch: arm64
+      path: https://github.com/haroondilshad/devpod-provider-oracle-cloud/releases/download/v0.0.1/devpod-provider-oracle-cloud-darwin-arm64
+      checksum: ""
+    - os: windows
+      arch: amd64
+      path: https://github.com/haroondilshad/devpod-provider-oracle-cloud/releases/download/v0.0.1/devpod-provider-oracle-cloud-windows-amd64.exe
+      checksum: ""
+options:
+  COMPARTMENT_ID:
+    description: "The Oracle Cloud Infrastructure compartment ID where resources will be created"
+    required: true
+  REGION:
+    description: "The Oracle Cloud Infrastructure region to use (e.g. us-ashburn-1)"
+    required: true
+  AVAILABILITY_DOMAIN:
+    description: "The availability domain to use (e.g. AD-1)"
+    required: true
+  DISK_IMAGE:
+    description: "The image to use for the instance (e.g. Oracle-Linux-8.6-2022.05.31-0)"
+    required: true
+  DISK_SIZE:
+    description: "The disk size in GB"
+    default: "50"
+  MACHINE_TYPE:
+    description: "The machine type to use (e.g. VM.Standard.E4.Flex)"
+    default: "VM.Standard.E4.Flex"
+  OCI_CONFIG_FILE:
+    description: "Path to the OCI config file"
+    default: "~/.oci/config"
+  OCI_PROFILE:
+    description: "Profile to use in the OCI config file"
+    default: "DEFAULT"
+  AGENT_PATH:
+    description: "The path where to inject the DevPod agent to"
+    default: "/opt/devpod/agent"
+agent:
+  path: ${AGENT_PATH}
+exec:
+  command: ${ORACLE_PROVIDER} command
+  init: ${ORACLE_PROVIDER} init
+  create: ${ORACLE_PROVIDER} create
+  delete: ${ORACLE_PROVIDER} delete
+  start: ${ORACLE_PROVIDER} start
+  stop: ${ORACLE_PROVIDER} stop
+  status: ${ORACLE_PROVIDER} status 

@@ -1,0 +1,38 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+
+users:
+  - name: devpod
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - {{ .PublicKey }}
+
+write_files:
+  - path: /opt/devpod/agent
+    permissions: '0755'
+    encoding: b64
+    content: {{ .AgentB64 }}
+  - path: /etc/systemd/system/devpod-agent.service
+    permissions: '0644'
+    content: |
+      [Unit]
+      Description=DevPod Agent
+      After=network.target
+      
+      [Service]
+      Type=simple
+      User=devpod
+      WorkingDirectory=/home/devpod
+      ExecStart=/opt/devpod/agent
+      Restart=always
+      RestartSec=5
+      
+      [Install]
+      WantedBy=multi-user.target
+
+runcmd:
+  - systemctl daemon-reload
+  - systemctl enable devpod-agent.service
+  - systemctl start devpod-agent.service 
